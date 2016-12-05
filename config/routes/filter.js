@@ -11,8 +11,8 @@ router.get('/', function (req, res, next) {
     var path = '/search/tweets.json?q=$IBM';
     var url = this.baseUrl + path;
     this.doRequest(url, error, success);
+    console.log(res);
   };
-  console.log(response);
 });
 
 module.exports = router;

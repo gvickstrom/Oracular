@@ -27,9 +27,9 @@ exports.updateTickers = function(object, callback) {
 
 /*for retrieving companies for user to selection*/
 
-exports.retrieveTickers = (object, callback) => {
+exports.retrieveTickers = (callback) => {
   knex('tickers')
-  .select('*')
+  .select('ticker', 'company_name')
   .then(results => {
     callback(null, results);
   })

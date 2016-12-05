@@ -5,43 +5,24 @@ const queries = require('../../controllers/queries');
 const knex = require('../../db/knex.js');
 
 router.get('/', function (req, res, next) {
-  //when user selects a ticker, redirect to filter page, and display name of stock
 
-  // res.render('Ticker');
+  // grab company names from database
 
-  // var options = {
-  //   method: 'GET',
-  //   url: 'https://api.intrinio.com/companies',
-  //   qs: { username: process.env.INT_USERNAME,
-  //         password: process.env.INT_PASSWORD },
-  //         headers: { 'Authorization': 'Basic ZTFjYTExZDMxZWU5YWZlM2E0NjA0NzU4M2UxMmY2YTM6MGJiZjdkOGMzYTM2MDMyMjJlZjQwNTVlYWIyNDcwMTU='}
-  //       };
-  //
-  // request(options, function (error, response, body) {
-  //   if (error) throw new Error(error);
-  //   body = JSON.parse(body);
-  //   let companies = body.data;
-  //
-  //   let coList = companies.map((el) => {
-  //     return [el.ticker, el.name]
-  //   })
-  //
-  //   //object constructor to update database
-  //
-  //   for (var i = 0; i < coList.length; i++) {
-  //     var coObj = {
-  //       ticker: coList[i][0],
-  //       company_name: coList[i][1]
-  //     }
-  //     //return data to the database
-  //
-  //     queries.updateTickers(coObj, (req, res, next) => {
-  //       if (error) throw new Error(error);
-  //       let returnObj = {};
-  //       returnObj.message = 'Data succesfully added!';
-  //     })
-  //   }
-  // });
+    queries.retrieveTickers((error, response, body) => {
+      if (error) throw new Error(error);
+      let returnObj = {};
+      returnObj.message = 'Got tickers succesfully!';
+      // var coData = response;
+      var coData = response.map((el) => {
+        return [el.ticker, el.company_name];
+      })
+      var dropDownData = [];
+      for (var i = 0; i < coData.length; i++) {
+        dropDownData.push(coData[i][0] + ':' + coData[i][1])
+      }
+      res.send(dropDownData);
+    });
 });
+
 
 module.exports = router;

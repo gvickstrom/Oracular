@@ -1,42 +1,66 @@
 import React, { Component } from 'react';
-import { Navbar, Jumbotron, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router'
+import { Navbar, Jumbotron, Button, FormGroup, FormControl, Col, InputGroup, Input } from 'react-bootstrap';
+import { Combobox } from 'react-input-enhancements';
+import fetch from 'isomorphic-fetch';
+
 
 class Ticker extends Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     selection: '',
-  //     company: ''
-  //   }
-  //   this.tickerSelect = _.debounce(() => {this.fetchTickers(this.state.select)}, 500)
-  // }
+  constructor(props) {
+    super(props)
 
-  //write logic to set state once user selects a ticker as well as auto-complete as they begin to type
+    this.state = {
+      value: '',
+      tickerData : [],
+    };
 
-  // fetchTickers(select) {
-  //   return fetch()
-  // }
+  }
 
+  componentDidMount() {
+    return fetch('/Ticker')
+    .then(res => res.json())
+    .then(json => {
+      this.setState({tickerData : json})
+    })
+}
+
+  onChange(text) {
+    this.setState({ value: text });
+    localStorage.setItem('ticker', text)
+    browserHistory.push('/Filter')
+  }
+
+  // handleChange(event) {
+  //   this.setState({value: event.target.value})
+  // };
 
   render() {
     return (
-      <div className="App">
-        <h2>Stock Selection Page</h2>
-        <div className="App-body">
-          <h3>Please Select a Stock...</h3>
-          <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Select U.S. Ticker</ControlLabel>
-            <FormControl componentClass="select" placeholder="Select from Dropdown">
-              <option value="select">IBM</option>
-              <option value="other">APPL</option>
-              <option value="other">NLY</option>
-              <option value="other">CIM</option>
-              <option value="other">GDX</option>
-            </FormControl>
-          </FormGroup>
+      <FormGroup>
+        <div className="App">
+          <h1>Stock Selection Page</h1>
+          <div className="App-body">
+            <h3>Please Select a Stock: </h3>
+              <Combobox
+                defaultValue={this.state.value}
+                options={this.state.tickerData}
+                onSelect={e => this.onChange(e)}
+                autosize
+                autocomplete>
+                {(inputProps, otherProps, registerInput) =>
+                  <FormControl
+                    id="tickerbox"
+                    {...inputProps}
+                    ref={c => registerInput(ReactDOM.findDOMNode(c))}
+                    type='text'
+                    placeholder='Select a Company'
+                  />
+                }
+              </Combobox>
+          </div>
         </div>
-      </div>
+      </FormGroup>
     )
   }
 }

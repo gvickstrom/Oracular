@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+#tickerbox {
+  padding: 20px;
+}
+
+.date-slider {
+  height: 100px;
+  color: white;
+}
+
+
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
