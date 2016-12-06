@@ -8,6 +8,7 @@ import Default404 from './components/Default404';
 import Landing from './components/Landing';
 import Ticker from './components/Ticker';
 import Filter from './components/Filter';
+import Graph from './components/Graph';
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <IndexRoute component={Landing} />
       <Route path="/Ticker" component={Ticker} />
       <Route path="/Filter" component={Filter} />
+      <Route path="/Graph" component={Graph} />
     </Route>
   </Router>
   , document.getElementById('root')

@@ -31,10 +31,6 @@ class Ticker extends Component {
     browserHistory.push('/Filter')
   }
 
-  // handleChange(event) {
-  //   this.setState({value: event.target.value})
-  // };
-
   render() {
     return (
       <FormGroup>
