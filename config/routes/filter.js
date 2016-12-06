@@ -32,7 +32,7 @@ router.get('/:id', function (req, res, next) {
     //get sentiment score of tweets
 
     var alchemy_language = watson.alchemy_language({
-      api_key:'4aa2857d67327db4c8cf5563287f3ca77683e271'
+      api_key:process.env.ALCHEMY_KEY
     })
 
     var parameters = {
