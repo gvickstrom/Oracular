@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-import ReactBootstrapSlider from 'react-bootstrap-slider';
 import { DateRange } from 'react-date-range';
 import Ticker from './Ticker';
-const moment = require('moment');
+import moment from 'moment';
+import Panel from './Panel';
 
 class Filter extends Component {
 
@@ -19,66 +18,45 @@ class Filter extends Component {
       min: 0,
       step: 1,
       minDate: moment().subtract(7, 'days'),
-      dateRange : {},
-      followerRange: [],
       twitterData: []
     };
-    this.changeKlout = this.changeKlout.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
-
-//code to capture the date and klout range to get the twitter data
+//code to capture the date range to get the twitter data
 
   handleSelect(range) {
-    console.log(range);
+    let startDate = moment(range.startDate._d).format('YYYY-MM-DD')
+    let endDate = moment(range.endDate._d).format('YYYY-MM-DD')
+    localStorage.setItem('startDate', startDate)
+    localStorage.setItem('endDate', endDate)
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
-  changeKlout(e) {
-    // console.log(e);
-    // this.setState( { kloutRange : e.target.value})
-    this.minFollowers = e.target.value;
-  }
-
-  handleClick(e) {
-    console.log(this.minFollowers);
-    return fetch(`/Filter/$${localStorage.getItem('ticker')}?minFollowers=${this.minFollowers}`)
-    .then(res => res.json())
-    .then(json => {
-      this.setState({ twitterData : json.statuses })
-      console.log(this.state.twitterData);
-    })
-  }
+  // handleClick(e) {
+  //   return fetch(`/Filter/$${localStorage.getItem('ticker')}?minFollowers=${this.minFollowers}&startDate=${this.startDate}&endDate=${this.endDate}`)
+  //   .then(res => res.json())
+  //   .then(json => {
+  //     this.setState({ twitterData : json.statuses })
+  //   })
+  //   .then(browserHistory.push('/Graph'))
+  // }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-body">
-          <h1>Filter Page</h1>
-          <h2>Select a Date Range for {localStorage.getItem('ticker')}</h2>
-            <div>
-              <DateRange
-                onInit={this.handleSelect}
-                onChange={this.handleSelect}
-                minDate={this.state.minDate} />
-            </div>
-          <h2>Select Minimum Number of Followers for {localStorage.getItem('ticker')}</h2>
-          <div className="followers-slider">
-          <ReactBootstrapSlider
-            className="followers-slider"
-            value={this.state.currentValue}
-            change={this.changeKlout}
-            step={this.state.step}
-            max={this.state.max}
-            min={this.state.min}
-            orientation="horizontal"
-           />
-          </div>
-          <div>
-            <Button onClick={this.handleClick}id="get-graph-btn" bsStyle="primary" bsSize="large" active>Create Graph!</Button>
+      <Panel title="Step 2:">
+        <div className="Filter">
+          <div className="Filter-body">
+            <h2>Then, Choose a Date Range: </h2>
+              <div>
+                <DateRange
+                  onChange={this.handleSelect}
+                  minDate={this.state.minDate} />
+              </div>
           </div>
         </div>
-      </div>
+      </Panel>
     )
   }
 }

@@ -1,9 +1,38 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .App {
   text-align: center;
 }
 
+.hero-img {
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+  filter: brightness(60%);
+}
+
 #tickerbox {
-  padding: 20px;
+  padding: 25px;
+  margin: 1px black;
+  background-color: #131313;
+}
+
+#step-four {
+  margin-top: -15px;
+}
+
+#tickerbox:hover,
+#tickerbox:dropDownData {
+  color: #131313 !important;
+  background-color: #fffafa;
 }
 
 .date-slider {
@@ -11,6 +40,114 @@
   color: white;
 }
 
+.welcome {
+  color: #fffafa;
+  animation: fadein 3s;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+.header-text {
+  font-size: 110px;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#start-btn {
+  position: relative;
+  top: 100px;
+  display: inline-block;
+  width: 600px;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 12px;
+  color: #fffafa;
+  background: none;
+  border: 3px solid #fffafa;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+}
+
+#start-btn:hover,
+#start-btn:active {
+  background-color: #fffafa;
+  color: #131313;
+  transition: background-color 0.2s ease-in,
+              color 0.2s ease-in;
+}
+
+#get-graph-btn {
+  position: relative;
+  top: 25px;
+  display: inline-block;
+  width: 600px;
+  font-weight: bold;
+  padding: 12px;
+  color: #131313;
+  background: none;
+  border: 3px solid #131313;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+}
+
+#get-graph-btn:hover,
+#get-graph-btn:active {
+  background-color: #131313;
+  color: #fffafa;
+  transition: background-color 0.2s ease-in,
+              color 0.2s ease-in;
+}
+
+#intro-paragraph {
+  color: #fffafa;
+  font-size: 32px;
+  animation: fadein 5s;
+  position: relative;
+  top: -180px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#top-of-two {
+  padding-top: 25px;
+}
+
+.panel-title {
+  font-size: 32px !important;
+  background: #100c08;
+  color: #fffafa !important;
+}
+
+.panel-body {
+  min-height: 480px;
+  background: #131313;
+  color: #fffafa;
+}
+
+#myChart {
+  padding: 25px;
+}
+
+@keyframes fadein {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+#graph {
+  padding-top: 300px;
+}
 
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
