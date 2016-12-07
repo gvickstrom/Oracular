@@ -47,6 +47,7 @@
     "react-dropdown-input": "^0.1.11",
     "react-input-enhancements": "^0.5.3",
     "request": "^2.79.0",
+    "twitter-node-client": "0.0.6",
     "webpack": "^1.13.3"
   },
   "devDependencies": {
