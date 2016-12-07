@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const config = require('../../config');
 const Twitter = require('twitter-node-client').Twitter;
 const watson = require('watson-developer-cloud');
 const moment = require('moment');
