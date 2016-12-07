@@ -17,10 +17,10 @@
     const routes = require('./config/routes/index');
     app.use('/', routes);
 
-    const tickerRoutes = require('./config/routes/Ticker');
+    const tickerRoutes = require('./config/routes/ticker');
     app.use('/Ticker', tickerRoutes);
 
-    const filterRoutes = require('./config/routes/Filter');
+    const filterRoutes = require('./config/routes/filter');
     app.use('/Filter', filterRoutes);
 
     // const kloutRoutes = require('../routes/klout');
