@@ -49,7 +49,7 @@ router.get('/:id', function (req, res, next) {
     var tweetsSentiment = sentimentArr.forEach(obj => {
       dates.push(obj.date);
       var alchemy_language = watson.alchemy_language({
-        api_key: config.ALCHEMY_KEY
+        api_key: process.env.ALCHEMY_KEY
       })
 
       var parameters = {
@@ -68,7 +68,12 @@ router.get('/:id', function (req, res, next) {
   };
 
   for (var i = 1; i < relevantDates.length; i++) {
-    var twitter = new Twitter();
+
+    var twitter = new Twitter({consumerKey: process.env.TWTR_API_KEY,
+                                consumerSecret: process.env.TWTR_API_SECRET,
+                                accessToken: process.env.TWTR_ACCESS_TOKEN,
+                                accessTokenSecret: process.env.TWTR_ACCESS_TOKEN_SECRET
+                            });
 
     twitter.getSearch({
       'q': cashTag,
