@@ -32,6 +32,8 @@ router.get('/:id', function (req, res, next) {
   };
 
   var success = function (response, data) {
+
+    //get the array of tweets back based on dates specified
     var sentimentArr = []
     var sentimentObj = {};
     var tweetsObj = JSON.parse(response);
@@ -39,10 +41,32 @@ router.get('/:id', function (req, res, next) {
       sentimentObj.date = tweet.created_at;
       sentimentObj.status = tweet.text;
       sentimentArr.push(sentimentObj);
-      console.log(sentimentArr);
     })
-  };
+    //get the array of sentiment scores back
+    var dates = [];
+    var scores = [];
+    var finalSentimentObj = {};
+    var tweetsSentiment = sentimentArr.forEach(obj => {
+      dates.push(obj.date);
+      var alchemy_language = watson.alchemy_language({
+        api_key: config.ALCHEMY_KEY
+      })
 
+      var parameters = {
+        text: obj.status
+      };
+
+     alchemy_language.sentiment(parameters, function (err, response) {
+      if (err)
+        console.log('error:', err);
+      else
+         var returnStr = JSON.stringify(response, null, 2);
+         var returnObj = JSON.parse(returnStr);
+         console.log(returnObj.status);
+      });
+    });
+    console.log(dates, scores);
+  };
 
   for (var i = 1; i < relevantDates.length; i++) {
     var twitter = new Twitter();
@@ -55,50 +79,9 @@ router.get('/:id', function (req, res, next) {
     }, error, success);
   }
 
-
-
-
-    // var arrOfTweets = sentimentArr.map(day => day[1]);
-    // var tweetsSentiment = arrOfTweets.map(tweet => {
-    //       var alchemy_language = watson.alchemy_language({
-    //         api_key: config.ALCHEMY_KEY
-    //       })
-    //
-    //       var parameters = {
-    //         text: tweet
-    //       };
-    //
-    //      alchemy_language.sentiment(parameters, function (err, response) {
-    //       if (err)
-    //         console.log('error:', err);
-    //       else
-    //         return JSON.stringify(response, null, 2);
-    //   });
-    // })
-
-
     /*get sentiment score of tweets*/
 
-    // var alchemy_language = watson.alchemy_language({
-    //   api_key: config.ALCHEMY_KEY
-    // })
-    //
-    // var parameters = {
-    //   text: sentimentArr.join()
-    // };
-    //
-    // alchemy_language.sentiment(parameters, function (err, response) {
-    //   if (err)
-    //     console.log('error:', err);
-    //   else
-    //     console.log(JSON.stringify(response, null, 2));
-    // });
-
-    /*get sentiment score of tweets*/
-
-    // res.send(tweetsObj);
-
-
+    res.send(sentimentArr); //send the array of dates and sentiment back to the front end to be used as data input for the graph
 
 });
 

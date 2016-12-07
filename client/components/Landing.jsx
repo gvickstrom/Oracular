@@ -6,7 +6,8 @@ import Ticker from './Ticker';
 import Filter from './Filter';
 import Panel from './Panel';
 import Slider from './Slider';
-// import logo from '../images/CanaryWharf1.jpg';
+import Graph from './Graph';
+
 class Landing extends Component {
   constructor() {
     super()
@@ -25,7 +26,7 @@ class Landing extends Component {
   }
 
   handleClick(e) {
-    const offset = $('#graph').offset().top;
+    const offset = $('#myChart').offset().top;
     $('html, body').animate({
       scrollTop: offset
     }, 1000);
@@ -82,7 +83,7 @@ class Landing extends Component {
             </button>
           </div>
           <div id="graph">
-            <h3>Graph Goes Here!</h3>
+            <Graph />
           </div>
         </div>
       </div>

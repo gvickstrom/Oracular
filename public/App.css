@@ -6,7 +6,6 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  padding-bottom: 600px;
 }
 
 .App {
@@ -131,6 +130,10 @@ body {
   min-height: 480px;
   background: #131313;
   color: #fffafa;
+}
+
+#myChart {
+  padding: 25px;
 }
 
 @keyframes fadein {
