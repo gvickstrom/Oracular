@@ -36,6 +36,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
     "knex": "^0.11.10",
+    "moment": "^2.17.1",
     "morgan": "~1.7.0",
     "nunjucks": "^2.4.2",
     "pg": "6.1.0",
@@ -50,6 +51,7 @@
     "react-input-enhancements": "^0.5.3",
     "request": "^2.79.0",
     "twitter-node-client": "0.0.6",
+    "watson-developer-cloud": "^2.11.1",
     "webpack": "^1.13.3"
   },
   "devDependencies": {
