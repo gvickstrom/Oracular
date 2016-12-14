@@ -23,6 +23,9 @@
     const filterRoutes = require('./config/routes/filter');
     app.use('/Filter', filterRoutes);
 
+    if (process.env.NODE_ENV !== 'production') {
+      require('dotenv').config()
+    }
     // const kloutRoutes = require('../routes/klout');
     // const graphRoutes = require('../routes/graph');
 

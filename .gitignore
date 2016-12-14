@@ -12,6 +12,11 @@ build
 # misc
 .DS_Store
 .env
+.keys
 npm-debug.log
 config.js
 node_modules
+
+orig_alch_key=4aa2857d67327db4c8cf5563287f3ca77683e271
+
+sec_alch_key=b219a2523ff31c705066b953bee1b4654ccf2eff
