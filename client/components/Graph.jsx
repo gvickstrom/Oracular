@@ -32,6 +32,51 @@ getDataClick() {
   }).catch(console.log)
 }
 
+componentDidMount() {
+  var ctx = this.refs.myChart;
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['12/6/2016', '12/7/2016', '12/8/2016', '12/9/2016'],
+        datasets: [
+          { label: 'Sentiment',
+            yAxisID: 'y-axis-1',
+            backgroundColor: 'rgba(0, 131, 248, 0.3)',
+            borderColor: 'rgba(202, 34, 0, 0.3)',
+            data: this.state.scores
+          },
+          { label: 'Share Price',
+            yAxisID: 'y-axis-2',
+            backgroundColor: 'rgba(28, 194, 49, 0.3)',
+            borderColor: 'rgba(0, 0, 0, 0.3)',
+            data: this.state.prices
+          }
+        ]},
+      options: {
+        drawOnChartArea : true,
+          scales: {
+              yAxes: [{
+                  type: "linear",
+                  position: "left",
+                  id: "y-axis-1"
+                },
+                {
+                  type: "linear",
+                  position: "left",
+                  id: "y-axis-2"
+                },
+                {
+                  ticks: {
+                    beginAtZero: false
+                  },
+                  stacked: true
+                }]
+                }
+              }
+            });
+          }
+
+
 componentWillUpdate() {
   var unfilteredScores = this.state.scores;
   var filteredScores = unfilteredScores.map(subArr => {
@@ -41,8 +86,6 @@ componentWillUpdate() {
      }
     })
   })
-  console.log("unfilteredScores", unfilteredScores);
-  console.log("Filtered Scores", filteredScores);
   var finalScores = filteredScores.map(el => {
     return el.reduce((a, b) => {
       return parseFloat(a) + parseFloat(b); }, 0) / el.length
@@ -60,7 +103,7 @@ componentWillUpdate() {
             yAxisID: 'y-axis-1',
             backgroundColor: 'rgba(0, 131, 248, 0.3)',
             borderColor: 'rgba(202, 34, 0, 0.3)',
-            data: filteredScores
+            data: finalScores
           },
           { label: 'Share Price',
             yAxisID: 'y-axis-2',
@@ -97,8 +140,8 @@ componentWillUpdate() {
     return (
       <div className="Graph">
         <div className="graphical-rep">
+          <button className="btn btn-success" id="get-data-btn" onClick={this.getDataClick}>Get Data</button>
           <canvas ref="myChart" id="myChart" width="100%" height="100%"></canvas>
-          <button onClick={this.getDataClick}>Get Data</button>
         </div>
       </div>
     )

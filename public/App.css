@@ -94,7 +94,8 @@ body {
               color 0.2s ease-in;
 }
 
-#get-graph-btn {
+#get-graph-btn,
+#get-data-btn {
   position: relative;
   top: 25px;
   display: inline-block;
@@ -112,7 +113,9 @@ body {
 }
 
 #get-graph-btn:hover,
-#get-graph-btn:active {
+#get-graph-btn:active,
+#get-data-btn:hover,
+#get-data-btn:active {
   background-color: #131313;
   color: #fffafa;
   transition: background-color 0.2s ease-in,

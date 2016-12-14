@@ -83,7 +83,8 @@ router.get('/:id', function (req, res, next) {
     var alchemy_language = watson.alchemy_language({
       api_key:process.env.ALCHEMY_KEY
     })
-  }
+  })
+}
 
   Promise.all(relevantDates.map((until, i) => {
     return getTheDates(relevantDates[i-1], until)

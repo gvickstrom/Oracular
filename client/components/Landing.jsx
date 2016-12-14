@@ -26,7 +26,7 @@ class Landing extends Component {
   }
 
   handleClick(e) {
-    const offset = $('#myChart').offset().top;
+    const offset = $('.graphical-rep').offset().top;
     $('html, body').animate({
       scrollTop: offset
     }, 1000);
