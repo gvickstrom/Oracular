@@ -79,6 +79,9 @@ router.get('/:id', function (req, res, next) {
         'since': date,
         'until': until,
       }, reject, resolve)
+
+    var alchemy_language = watson.alchemy_language({
+      api_key:process.env.ALCHEMY_KEY
     })
   }
 
